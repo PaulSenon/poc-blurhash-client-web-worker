@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,27 +8,49 @@
     <title>Document</title>
     <!-- critical -->
     <style>
+        body.newmorphism{
+            background-color: #e0e0e0;
+        }
+        .newmorphism .image-wrapper{
+            border-radius: 9px;
+            box-shadow: 6px 6px 20px 3px #bebebe, 
+                        -6px -6px 20px 3px #ffffff;
+        }
         body{
-            padding: 0px;
+            font-family: Arial, Helvetica, sans-serif;
+            padding-top: 50px;
+            padding-bottom: 50px;
             margin: 0px;
+        }
+        .hide-canvas canvas{
+            visibility: hidden;
+        }
+        .hide-background .image-wrapper{
+            background-color: unset;
+        }
+        h1{
+            text-align: center;
         }
         main {
             display: flex;
             place-content: center;
-            flex-direction: row;
+            flex-direction: column;
             flex-wrap: wrap;
             margin:auto;
-            gap: 10px;
+            gap: 50px;
         }
         .image-container{
-            width: 350px;
+            width: 100%;
+            max-width: 500px;
         }
         .image-wrapper{
-            background-color: beige;
             margin: auto;
             position: relative;
             width: 100%;
-            padding-bottom: 80%;
+            padding-bottom: 56.4%;
+            overflow: hidden;
+            border-radius: 3px;
+            background-color: #bebebe;
         }
         .image-wrapper>img, 
         .image-wrapper>canvas {
@@ -49,12 +72,20 @@
         }
         .image-wrapper>img {
             z-index: 2;
-            transition: opacity ease 150ms, filter ease 150ms;
+            transform: scale(1);
+            transition: opacity ease 250ms, filter ease 250ms, transform ease 250ms;
         }
-        .image-wrapper>img.hidden {
+        .image-wrapper>canvas {
+            /* transform: scale(1.1); */
+        }
+        .image-wrapper>img.hidden,
+        .image-wrapper>img.hidden-debug,
+        .image-wrapper>img:hover {
             opacity: 0;
             filter: blur(30px); 
+            transform: scale(1.05);
         }
+        
         #commands{
             background-color: lightgrey;
             gap: 5px;
@@ -70,51 +101,528 @@
 </head>
 <body class="cover">
     <main>
-        <!-- all canvas properties (hash and color) are processed serverside from the hash returned with images data (e.g. from api) -->
+        <h1>Demo blurhash placeholders</h1>
         <div class="image-container">
-            <div class="image-wrapper">
-                <img class="hidden"
-                    onload="this.classList.remove('hidden')"
-                    src="https://blurha.sh/assets/images/img1.jpg" 
-                    alt=""/>
-                <canvas data-blurhash="qEHV6nWB2yk8$NxujFNGpyoJadR*=ss:I[R%.7kCMdnjx]S2NHs:S#M|%1%2ENRis9a$Sis.slNHW:WBxZ%2ogaekBW;ofo0NHS4" 
-                    style="background-color: rgb(151, 150, 149);"></canvas>
-            </div>
-        </div>
-        <div class="image-container">
-            <div class="image-wrapper">
-                <img class="hidden"
-                    onload="this.classList.remove('hidden')"
-                    src="https://blurha.sh/assets/images/img2.jpg" 
-                    alt=""/>
-                <canvas data-blurhash="qHF5]+Yk^6#M9wKSW@j=@-5b,1J5O[V=R:s;@[or[k6.O[TLtJnN};FxngOZE3NgNHspjMFxS#OtcXnzRjxZj]OYNeR:JCs9xunh"
-                    style="background-color: rgb(131, 126, 152);"></canvas>
-            </div>
-        </div>
-        <div class="image-container">
-            <div class="image-wrapper">
-                <img class="hidden"
-                    onload="this.classList.remove('hidden')"
-                    src="https://blurha.sh/assets/images/img3.jpg" 
-                    alt=""/>
-                <canvas data-blurhash="q6Pj0^i_.AyE8^m+%gt,_3t7t7R*WBs,ofR-*0o#DgR4.Tt,ITVY_3R*D%xt%MIpRj%0McV@%itSI9R5x]tRIot7-:IoM{%LoeIV"
-                    style="background-color: rgb(222, 217, 213);"></canvas>
-            </div>
-        </div>
-        <div class="image-container">
-            <div class="image-wrapper">
-                <img class="hidden"
-                    onload="this.classList.remove('hidden')"
-                    src="https://blurha.sh/assets/images/img4.jpg" 
-                    alt=""/>
-                <canvas data-blurhash="qKO2?U%2Tw=wR6cErDEh]~RBVZRip0W9ofwx};RPxuwH%3s89]t8tLOtxZ%gixtQt8IUI.ENa0NZIVt6xFM{%1j^M_bcRPX9nht7"
-                    style="background-color: rgb(209, 178, 163);"></canvas>
-            </div>
-        </div>
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/66/01/26/750x422_cmsv2_cbe1d49c-ff5c-51d0-bfbb-cf3ef4b93864-5660126.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qSByv=xDOYkqofnienWC~WxDX9o|ofnii_af^+s.f,ozbbjZnhjY%fs.ofs:baWXnin%o#ofs:sokBWqayo0S5ofoLn*oLW:W;oL"
+					data-ratio="0.5626666666666666" style="background-color:#665a58"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/74/92/750x422_cmsv2_f6c134a5-61bc-5e77-ae10-fc8dc59c39e3-5657492.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qjDA4FtSkDj?j]f6j[j@%jt8ofj@j]ayfPj@%hofj@a|flayjsj[o$axayflfkayf6jut8WBWBofa#f7ayj[R+WBaej]axayj@j["
+					data-ratio="0.5626666666666666" style="background-color:#727a84"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/45/05/84/750x422_cmsv2_914ffb69-cd1b-58cc-8077-034986c79674-5450584.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qPD+-zxt9GoJxtaJX8%L~qxtIoWCj[Rjoft7ESj]%MWBNGR*oJWDE3NH%MfiNHoLWBayxXWBS5WVoLoLWBj[$zs,WYRkoLs:ayoe"
+					data-ratio="0.5626666666666666" style="background-color:#78726a"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/08/82/14/750x422_cmsv2_b7d029f7-46d2-53de-80ae-cc9d793f5a14-5088214.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qCF~a202004pxx~p$~9Ex[xZD%M#?aE3oaRR=|R*M|xaoxR.t3IVE3t3n,xsE2xZt7RnkCt6M{WCxvk8Rjt5oga#oINHbFt6WEkB"
+					data-ratio="0.5626666666666666" style="background-color:#8b8975"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/48/36/750x422_cmsv2_eda64a8f-8d14-54e5-83a7-5b2ee829a89c-5654836.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qF9k?CNMN#M}IVt7MxxtX=xvM{j]ofWBxuRj4^R+$xs,xaoft7j]n.M|%MjrWBWCM{t7s7%LM}kDWVM{j@RixvRiWCa#bFt7jYof"
+					data-ratio="0.5626666666666666" style="background-color:#537378"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/67/88/750x422_cmsv2_2c5d558e-d244-5946-a7f7-0988a6cb9c86-5656788.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qHJaPe4{0X~T9bsqo@WB=xxZRlNFNLWAI:so0CImjCMytJWGRVt6I]t7xWkD%LjZxZWBIexsx:WGaOj=RkjFRPM|S1V[oLWDWAaw"
+					data-ratio="0.5626666666666666" style="background-color:#a99658"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/75/18/750x422_cmsv2_801fe92d-36f6-50c3-931c-2a94d842b7f2-5657518.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qAD,Dw009uI.9F5T-==x8^u44o~A-;xYE1NG00k=={J.t6aJVsxaM{s.tRs9NaW=WBIotR%1NGE1xZoyxtj[I;s.t7Ios-a$WYxZ"
+					data-ratio="0.5626666666666666" style="background-color:#787b7b"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/75/18/750x422_cmsv2_801fe92d-36f6-50c3-931c-2a94d842b7f2-5657518.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qAD,Dw009uI.9F5T-==x8^u44o~A-;xYE1NG00k=={J.t6aJVsxaM{s.tRs9NaW=WBIotR%1NGE1xZoyxtj[I;s.t7Ios-a$WYxZ"
+					data-ratio="0.5626666666666666" style="background-color:#787b7b"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/77/88/750x500_cmsv2_19cd5035-6e0e-5eef-8cd2-c15d0783b8b4-5657788.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qHE3MD_4-;%goxW=f,nh9$tmozM{Mxe=kCj?_4.8jboJRjofV[bFt7WX%MRiNGbIjut7t7xuIoV@WCWVj[xuM{ogt8NGkCWBofoM"
+					data-ratio="0.6666666666666666" style="background-color:#7a7d84"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/40/94/750x500_cmsv2_0de32a7e-4895-5b89-ac5b-e9ff1e54edf3-5654094.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qXHT+:59bGt6M|xtM}s,~8NIa|j[e:bHafj@tQbHjZo0W;ayoeWWEkt6WCe.kCWBoeWXENt6WVWBofWBkBa|s.WCfkbHjZbHayj@"
+					data-ratio="0.6666666666666666" style="background-color:#97744c"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/23/87/28/750x500_cmsv2_d9a8905b-7a15-5015-8c3b-06c3bf286a7d-5238728.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qUIhW=n7oGIoajtRr?X9~MIAtTX7i^t8ofV?epNGROxukDRPkAogs;o}xvsmRjWBRkj[VrRiozj]WUj]WBfjXUkDROV?ayofayWC"
+					data-ratio="0.6666666666666666" style="background-color:#a19b91"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/15/88/750x500_cmsv2_0860876f-8c80-5643-afda-d3c2f4fa8dd2-5641588.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="q@GvVCIVtRaxM_ocaxfR.ARlozj?WAaej]a{tSozWAa$ozayogj[WFWYaej[ogj]a#kCfjoeayWCj[j]axayWBazaej?ayfPaeay"
+					data-ratio="0.6666666666666666" style="background-color:#91a0aa"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/90/750x500_cmsv2_f5aee7d4-6e14-54a4-aa64-bd1e937dbbe6-5512690.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qTQ7hC{|+}0#-oyAnOWX_LFcXRxYV[s;R+j[-oRoNd$NNdR,X9nPNar^n,R*oySNoej?v~SgSzt6njahs+kCNZn%WBoMWBoKsoWB"
+					data-ratio="0.6666666666666666" style="background-color:#e3a27a"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/88/750x500_cmsv2_5d4fa92a-7199-56ff-9a04-3995ed6e14c7-5512688.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qPQZ=X|x,I0}^OkVVxs+?]E}Xk$gNKxaSwaf-.S5S$w[OXS#R+jtOTwzWFR*t6Nxt5kB#ANbWUxaRksmt6WCR$bHaeozn~eonmax"
+					data-ratio="0.6666666666666666" style="background-color:#e69d72"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/86/750x500_cmsv2_ccb28855-239d-51ba-b83b-16e19ebc4fd0-5512686.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qVPg{N^3}p0z$$%fM{j@_0JBJUxaoLsRS5f5={RkJU$gShS5S$odJBwKsmWBS$OFw[n~#RS5R+ogjFnht5WXNtWqf5s,jFoJW?WX"
+					data-ratio="0.6666666666666666" style="background-color:#dea281"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/84/750x500_cmsv2_8ae0a806-4735-542d-9e46-362526aac25a-5512684.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qSPz#~{3-OE4Iu^NMxgM^iJVK6$ywbOYo}RQ^OEj$$RjtlJBt3r?SxxZV[WXSioeV[oxrXbvNd%1VsfSt7RkE+r?wIR-ofr?e.bb"
+					data-ratio="0.6666666666666666" style="background-color:#e09c84"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/82/750x500_cmsv2_1c9f1226-3147-5af1-a392-f748034dcb0c-5512682.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qQP|^n}j=]6Nxt$MrtRQ+uKkWGRPxWtQI;s;^QM|I=,DK5S~bbnOOXwIXSofS$OD$*R*vgOZWBoMw^kVnhkCOWkBjFoeaenij[V@"
+					data-ratio="0.6666666666666666" style="background-color:#e2a08b"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/51/26/80/750x500_cmsv2_bafc366e-ab84-5123-ae71-02e7f3b67316-5512680.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qMQaKl=q{dB-vzk=nlrq?ET0GGiwxvnOV?kC~AIqOX,ZI=S$XlWVTZs+tPg1NuTJs:i_ickXSLbFxunOnhbHJ-bawJbbZ~s:X8Rk"
+					data-ratio="0.6666666666666666" style="background-color:#e6a78d"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/68/44/750x500_cmsv2_c18b2810-5608-59a4-b3f2-12c725053ad5-5646844.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qoCjS0r;jrs.WqoeWVjsKnM{ayj?a|oLjsj?t9fkofayayj[a#oLMxt7W=WCjZWCj[j[Mxozj[WEoLWCfQWVV@ocjYWXj]azj[WB"
+					data-ratio="0.6666666666666666" style="background-color:#6d768d"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/25/01/08/750x500_cmsv2_5a96cb66-59cd-5013-99c6-5ece092a87cf-5250108.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qSGJdft8Rieno#aeV@o#0[R-ofa{WBa|kBayDNWAWBogWBofj]WA%Nj]ofRjofaeaykCR+j[aeofayoffRaxM_WBa~ofjYWBj[jZ"
+					data-ratio="0.6666666666666666" style="background-color:#8da4c9"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/60/22/32/750x500_cmsv2_abfccbb9-4fdd-53e8-aad7-5353e68b6633-5602232.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qJI5MS4Txu%hIAt5afNH5S$JkCWtaKtRofbb?dI9t8t7xtWDj@xuSRNZV[xtNGRQt7aeNJWBo#M_t8xuofs:%MRnR*WAs:%1s:R%"
+					data-ratio="0.6666666666666666" style="background-color:#9d9991"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/66/33/16/750x500_cmsv2_74b60ed1-1b76-50fb-9470-8c6313bb6246-5663316.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qPFGF7?wx[V?s+X9R*M{1nx[xus.WBj]kCs.M{M{W;kCfkV@oKf,Q,NHR*f+ogs.f5WrxZtRRjRjR*WBWBWBtSofxaj]jskCofoJ"
+					data-ratio="0.6666666666666666" style="background-color:#849299"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/45/71/50/750x500_cmsv2_b0441f1c-79e8-5a0f-90ef-b8435c962961-5457150.jpg"
+            alt=""/>
+
+				<canvas
+					data-blurhash="qYHeXjR$WBs:a#ayoLay?wwcofWDWCjsj[ay%MWAs:kCWCayj@WVM{WUoLjuWVWCWVfPE2s:ayWVayazayf6f+s:oKj@j[ayWCay"
+					data-ratio="0.6666666666666666" style="background-color:#989183"></canvas>
+
+			</div>
+		</div>
+
+		<div class="image-container">
+			<div class="image-wrapper">
+				<img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/67/62/750x500_cmsv2_6946fb82-accf-5331-83f7-476ccf3090ce-5646762.jpg"
+            alt=""/>
+
+				<canvas data-blurhash="q49QU2i]00~qsR9Fp0xbIbt7-;M{WE%2IUIV00Rk%gD*R+xuskWAM|RQD%t7t6M{%M%L^$xuxZM{t7t7WBt8?GkCj]oJWBoLaejb" data-ratio="0.6666666666666666" style="background-color:#514b49"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/21/82/750x500_cmsv2_e3085d99-324f-5adb-8818-0ad99d49be89-5642182.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qu7WdHkBRQj[o0bHkVayt:kBbFjtf6fkj@fQV_j[tPaybHjtaLfkbajZe.fkkCf6ayj[oxayV[j[jFa|kCayV@a}kCjZaefkj[ay" data-ratio="0.6666666666666666" style="background-color:#407ca3"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/99/06/750x500_cmsv2_8eeddb92-9166-5734-9443-4c6b4a480d90-5649906.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qcHAbQv~R+oJaeayaxoL~XnhfRjZWVf6jZa|%hR*S4j[jtayWVfRK6W;bHa|WVfPayfkNHs:ofayayjsfRa}RQxGs.fkbHjsaya|" data-ratio="0.6666666666666666" style="background-color:#956b6e"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/98/34/750x500_cmsv2_73f72897-232b-56b2-839f-1bff33815201-5649834.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qEI;Cj00D*$%tmQ-x]R6-,ZzJD-UNxo#R5o#_NnmRitlwHE2nmkqNtv}Ip%fRjaxj]R*%gxaR5f,S4xaM{V@WYxsRjW=ayaebbMy" data-ratio="0.6666666666666666" style="background-color:#a48676"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/63/45/82/750x500_cmsv2_0cb0cc8f-66e2-5135-8189-8fefe57f0269-5634582.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qBDv[%?bXU9F8_Mw%gx].m.9%2r=M_RkbHog8x%gtRNHbwxtRPozM}IV%MxvWCRkIAtRW9V@RPbFWARjRjkCIAWBWEkBofRPs:xa" data-ratio="0.6666666666666666" style="background-color:#778281"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/20/63/60/750x500_cmsv2_5bf27c23-2ad5-5edb-8202-7604ce7cf1c0-5206360.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qFR@okA]:-{{+dF_BnSz[X#-K4BTNwwc$Mr@zXr;S}OsS~rrrrjFC5K5#S+bwcOYOYXR,@xGNaIpS1oft7oyR6R%oztRt6V@RjWB" data-ratio="0.6666666666666666" style="background-color:#f36967"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/19/11/26/750x500_cmsv2_dd64c9b6-475d-5cf8-9483-31b6999a8aa9-5191126.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qARkUl493W$x_*{1:R+aSjOrK4I;Z%z;+H:+@H:*rrJCC6GsPAo}ImMeV@xZ%2xut8X,q^rWv}wJ%1$+$lxakXkpt6soS~KiGFOY" data-ratio="0.6666666666666666" style="background-color:#f07170"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/17/12/28/750x500_cmsv2_e35295e1-ed79-57d3-bcfe-d16e96d72b0c-5171228.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qBSAeT1ORl=t{+].#:NunkX7S#X8jIn+kCe?[E=ss,I[BAAaN^r@SxV]njs,t3ocWCS_VcV_WqoJtLxCs,bawgs.jFV]SgW:oJsA" data-ratio="0.6666666666666666" style="background-color:#f56563"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/15/10/36/750x500_cmsv2_f61151f6-352e-50ee-9662-69cdc8dfe321-5151036.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qMS4QU72Sg;2}j]#$fOYoLoeoeahbYWCV]k8$xrrafS#NyS$kCs,$yxCoJbaRnSNSzN2xVniagS}RoX7ocnit4jbfRW:R-WDazoJ" data-ratio="0.6666666666666666" style="background-color:#f4bf64"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/03/88/750x500_cmsv2_864a9e98-c566-52b6-ab92-2d806928856a-5650388.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qMI4qe1Ua3wJaeoyNxn%0N}Q$*OFW;s9afbHm+,-KOxBWCS6oJWB$MRks8bFbbWVn$W=Xmbar=ahn$oJX7j@t5W=a$j@oIazS4sl" data-ratio="0.6666666666666666" style="background-color:#9d886e"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/64/69/64/750x500_cmsv2_2578c37c-accb-548b-a2e7-67fca5a5f9ed-5646964.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qFG9mb00IUt6~q9FWCM{4TS4tSWAozs:kCxuE1-;%MD%aKM{ayof-pD%X8xus:M{V[of?vV@%MbHx[RQWBof?bNGIUR*xujss:Rj" data-ratio="0.6666666666666666" style="background-color:#8c9a96"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/63/33/64/750x500_cmsv2_b2e19597-742e-5256-8c17-2388658e6e19-5633364.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qTJuM+NLMw?bIURkRkt6?w?bMxxuNGIoofV@D%x]t5E2kDfkozRjNfRjRjR*RjoJa|ozR%RkaeM|ozt7WBbHNINGs:RjbIa}fkj[" data-ratio="0.6666666666666666" style="background-color:#abafad"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/62/87/02/750x500_cmsv2_5d37a673-572a-519d-9dc2-4480d948e6c4-5628702.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qUDvi%t6t6WBogRkofa}_4%3e.ayj]WWbHaz?cWrofaxoeayayfR-;ozRkoyWBaeayf6%MR*kCWVjsjZaxjst7kCR*t7WBoLf6js" data-ratio="0.6666666666666666" style="background-color:#777874"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/65/72/34/750x500_cmsv2_3e8d8944-1875-51fa-9faf-8a03d0e4e5fa-5657234.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qeJ7:zM{IUofRjs:oLj@VpM{oyj[WCofj[jt9Et8xbWVj]ayayay_4Rjf7a|WBWBWBfQE0M{j[oeWBf6j[oeWBt7WAt7fkoLj]j[" data-ratio="0.6666666666666666" style="background-color:#a6989f"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/62/43/48/750x500_cmsv2_5e413fab-3ef5-5165-a83b-584cfa49f1d2-5624348.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qXIOLh~qM{DiNH%2WAIU_3%Ma~M{RkoLWBRjIpo#oeWAoIWXf*t7D%M{ofxZj[WVaykCnhaJbIWBa#oJa#WBRiRij[NGflaxa#of" data-ratio="0.6666666666666666" style="background-color:#9f9898"></canvas>
+        
+    </div>
+</div>
+        
+            <div class="image-container">
+    <div class="image-wrapper">
+        <img class="hidden"
+            onload="this.classList.remove('hidden')"
+            data-src="https://static.euronews.com/articles/stories/05/61/16/88/750x500_cmsv2_5db84390-98d8-51ed-81f8-fb0b1d4b1424-5611688.jpg" 
+            alt=""/>
+        
+            <canvas data-blurhash="qOC6_dR*V@V[ayM{t7V@~qoz%MIUj[afV@Rj?bt7%MIUayWBRjWB_3Won$aeWBRjozay-;oft7RjayWWf5jZxus:ofWBbHayadfR" data-ratio="0.6666666666666666" style="background-color:#696d6b"></canvas>
+        
+    </div>
+</div>
+        
     </main>
     <div id="commands">
-        <button id="toggle">toggle</button>
+        <button id="toggle">toggle image</button>
+        <button id="togglePlaceholder">toggle placeholders</button>
+        <button id="toggleBackground">toggle background</button>
         <button id="toggleFit">fit</button>
+        <button id="toggleBlur">toggle blurhash placeholders (reload)</button>
     </div>
 </body>
 </html>
